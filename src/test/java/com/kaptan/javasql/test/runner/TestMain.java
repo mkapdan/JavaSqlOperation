@@ -1,6 +1,7 @@
 package com.kaptan.javasql.test.runner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import com.kaptan.javasql.test.comprator.NameComparator;
 import com.kaptan.javasql.test.filterer.AgeFilterer;
 import com.kaptan.javasql.test.filterer.NameFilterer;
 import com.kaptan.javasql.test.grouper.AgeGrouper;
+import com.kaptan.javasql.test.grouper.DateGrouper;
 import com.kaptan.javasql.test.grouper.NameGrouper;
 import com.kaptan.javasql.test.model.TestData;
 import com.kaptan.orderby.OrderBy;
@@ -21,10 +23,14 @@ public class TestMain {
 
 	public static void main(String[] args) {
 
+		Calendar inst = Calendar.getInstance();
+		inst.setTime(new Date());
+		inst.add(Calendar.DATE, 3);
+		Date tomorrow = inst.getTime();
 		// Init Data
 		TestData o1 = new TestData("ZZZ", 24, new Date());
 		TestData o2 = new TestData("AAA", 24, new Date());
-		TestData o3 = new TestData("AAA", 25, new Date());
+		TestData o3 = new TestData("AAA", 25, tomorrow);
 
 		List<TestData> items = new ArrayList<TestData>();
 		items.add(o1);
@@ -62,6 +68,16 @@ public class TestMain {
 		Map<Integer, List<TestData>> integerData = integerGrouper.group(items);
 
 		for (Map.Entry<Integer, List<TestData>> mapEnt : integerData.entrySet()) {
+
+			System.out.println("###" + mapEnt.getKey() + "###");
+			printData("Result", mapEnt.getValue());
+		}
+
+		Grouper<Date, TestData> birthGrouper = new DateGrouper();
+		TestDataDateGroupByOperator dateGroupOperator = new TestDataDateGroupByOperator(birthGrouper);
+		Map<Date, List<TestData>> dateData = dateGroupOperator.group(items);
+
+		for (Map.Entry<Date, List<TestData>> mapEnt : dateData.entrySet()) {
 
 			System.out.println("###" + mapEnt.getKey() + "###");
 			printData("Result", mapEnt.getValue());
