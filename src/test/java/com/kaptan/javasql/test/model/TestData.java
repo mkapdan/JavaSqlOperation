@@ -1,4 +1,4 @@
-package com.kaptan.model;
+package com.kaptan.javasql.test.model;
 
 import java.util.Date;
 

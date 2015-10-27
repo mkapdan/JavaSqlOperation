@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface OrderBy<T> extends Serializable {
 
-	List<T> filter(List<T> listOfItems);
+	List<T> orderBy(List<T> listOfItems);
 
-	List<T> filter(List<T> listOfItems, Comparator<T> comprator);
+	List<T> orderBy(List<T> listOfItems, Comparator<T> comprator);
+
+	void setComparator(Comparator<T> comparator);
 }
