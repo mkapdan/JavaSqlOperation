@@ -3,24 +3,26 @@ package com.kaptan.filterby;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractFilterBy<T, V> implements FilterBy<T, T> {
+public abstract class AbstractFilterBy<T, V> implements FilterBy<T, V> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected Filterer<T, T> filterer;
+	protected Filterer<T, V> filterer;
 
-	public AbstractFilterBy(Filterer<T, T> filterer) {
+	public AbstractFilterBy(Filterer<T, V> filterer) {
 		setFilterer(filterer);
 	}
 
-	public Filterer<T, T> getFilterer() {
+	public Filterer<T, V> getFilterer() {
 		return filterer;
 	}
 
-	public List<T> filter(List<T> listOfItems, T filterData) {
+	public abstract void setFilterer(Filterer<T, V> filterer);
+
+	public List<T> filter(List<T> listOfItems, V filterData) {
 
 		List<T> filteredItems = new ArrayList<T>();
 
@@ -32,7 +34,7 @@ public abstract class AbstractFilterBy<T, V> implements FilterBy<T, T> {
 		return filteredItems;
 	}
 
-	public List<T> filter(List<T> listOfItems, T filterData, Filterer<T, T> filterer) {
+	public List<T> filter(List<T> listOfItems, V filterData, Filterer<T, V> filterer) {
 		List<T> filteredItems = new ArrayList<T>();
 
 		for (T item : listOfItems) {
@@ -42,7 +44,5 @@ public abstract class AbstractFilterBy<T, V> implements FilterBy<T, T> {
 		}
 		return filteredItems;
 	}
-
-	public abstract void setFilterer(Filterer<T, T> filterer);
 
 }

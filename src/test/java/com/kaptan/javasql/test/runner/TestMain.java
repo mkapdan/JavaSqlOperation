@@ -12,10 +12,12 @@ import com.kaptan.filterby.Filterer;
 import com.kaptan.groupby.Grouper;
 import com.kaptan.javasql.test.comprator.NameComparator;
 import com.kaptan.javasql.test.filterer.AgeFilterer;
+import com.kaptan.javasql.test.filterer.DifferentObjectNameFilterer;
 import com.kaptan.javasql.test.filterer.NameFilterer;
 import com.kaptan.javasql.test.grouper.AgeGrouper;
 import com.kaptan.javasql.test.grouper.DateGrouper;
 import com.kaptan.javasql.test.grouper.NameGrouper;
+import com.kaptan.javasql.test.model.CopyOfTestData;
 import com.kaptan.javasql.test.model.TestData;
 import com.kaptan.orderby.OrderBy;
 
@@ -100,6 +102,14 @@ public class TestMain {
 
 		filtereds = filterOperator.filter(items, o1);
 		printData("After", filtereds);
+
+		/******************* Name Filterer ****************************/
+		CopyOfTestData cp1 = new CopyOfTestData("AAA", 24, new Date());
+		Filterer<TestData, CopyOfTestData> diffFilterer = new DifferentObjectNameFilterer();
+		TestDataFilterByDiffObjOperator diffFilterOper = new TestDataFilterByDiffObjOperator(diffFilterer);
+		List<TestData> myFiltereds = diffFilterOper.filter(items, cp1);
+		printData("After", myFiltereds);
+
 	}
 
 	private static List<TestData> orderOperationTests(List<TestData> items) {
