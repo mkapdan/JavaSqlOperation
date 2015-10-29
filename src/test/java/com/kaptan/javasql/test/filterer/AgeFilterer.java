@@ -10,7 +10,7 @@ public class AgeFilterer extends AbstractFilter<TestData, TestData> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public boolean isEqual(TestData target, TestData source) {
+	public boolean isConditionMet(TestData target, TestData source) {
 
 		if (nullCheckEqualty(target, source)) {
 

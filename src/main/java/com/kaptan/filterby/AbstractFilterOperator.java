@@ -37,7 +37,7 @@ public abstract class AbstractFilterOperator<T, V> implements FilterOperator<T, 
 		Collection<T> filteredItems = new ArrayList<T>();
 
 		for (T item : listOfItems) {
-			if (filterCondition.isEqual(item, filterData)) {
+			if (filterCondition.isConditionMet(item, filterData)) {
 				filteredItems.add(item);
 			}
 		}
@@ -48,7 +48,7 @@ public abstract class AbstractFilterOperator<T, V> implements FilterOperator<T, 
 		Collection<T> filteredItems = new ArrayList<T>();
 
 		for (T item : listOfItems) {
-			if (filterCondition.isEqual(item, filterData)) {
+			if (filterCondition.isConditionMet(item, filterData)) {
 				filteredItems.add(item);
 			}
 		}

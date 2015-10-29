@@ -10,5 +10,5 @@ import java.io.Serializable;
  */
 public interface Filter<T, V> extends Serializable {
 
-	boolean isEqual(T target, V source);
+	boolean isConditionMet(T target, V source);
 }

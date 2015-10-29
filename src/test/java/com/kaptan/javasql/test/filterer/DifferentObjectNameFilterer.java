@@ -11,7 +11,7 @@ public class DifferentObjectNameFilterer extends AbstractFilter<TestData, CopyOf
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public boolean isEqual(TestData target, CopyOfTestData source) {
+	public boolean isConditionMet(TestData target, CopyOfTestData source) {
 		
 		if (nullCheckEqualty(target, source)) {
 

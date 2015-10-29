@@ -14,6 +14,7 @@ import com.kaptan.groupby.GrouperBy;
 import com.kaptan.javasql.test.comprator.DateComparator;
 import com.kaptan.javasql.test.comprator.NameComparator;
 import com.kaptan.javasql.test.filterer.AgeFilterer;
+import com.kaptan.javasql.test.filterer.DateFilter;
 import com.kaptan.javasql.test.filterer.DifferentObjectNameFilterer;
 import com.kaptan.javasql.test.filterer.NameFilterer;
 import com.kaptan.javasql.test.grouper.AgeGrouper;
@@ -111,6 +112,13 @@ public class TestMain {
 		TestDataFilterByDiffObjOperator diffFilterOper = new TestDataFilterByDiffObjOperator(diffFilterer);
 		Collection<TestData> myFiltereds = diffFilterOper.filter(items, cp1);
 		printData("After", myFiltereds);
+		
+		filterer = new DateFilter();
+		filterOperator.setFilterCondition(filterer);
+
+		filtereds = filterOperator.filter(items, o1);
+		printData("After", filtereds);
+
 
 	}
 
