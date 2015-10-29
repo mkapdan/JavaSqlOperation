@@ -1,24 +1,24 @@
 package com.kaptan.javasql.test.runner;
 
-import com.kaptan.filterby.AbstractFilterBy;
-import com.kaptan.filterby.Filterer;
+import com.kaptan.filterby.AbstractFilterOperator;
+import com.kaptan.filterby.Filter;
 import com.kaptan.javasql.test.model.CopyOfTestData;
 import com.kaptan.javasql.test.model.TestData;
 
-public class TestDataFilterByDiffObjOperator extends AbstractFilterBy<TestData, CopyOfTestData> {
+public class TestDataFilterByDiffObjOperator extends AbstractFilterOperator<TestData, CopyOfTestData> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TestDataFilterByDiffObjOperator(Filterer<TestData, CopyOfTestData> filterer) {
+	public TestDataFilterByDiffObjOperator(Filter<TestData, CopyOfTestData> filterer) {
 		super(filterer);
 	}
 
 	@Override
-	public void setFilterer(Filterer<TestData, CopyOfTestData> filterer) {
-		this.filterer = filterer;
+	public void setFilterCondition(Filter<TestData, CopyOfTestData> filterer) {
+		this.filterCondition = filterer;
 	}
 
 }

@@ -3,9 +3,9 @@ package com.kaptan.javasql.test.comprator;
 import java.util.Date;
 
 import com.kaptan.javasql.test.model.TestData;
-import com.kaptan.orderby.AbstractComparator;
+import com.kaptan.orderby.AbstractOrderBy;
 
-public class DateComparator extends AbstractComparator<TestData> {
+public class DateComparator extends AbstractOrderBy<TestData> {
 
 	public int compare(TestData o1, TestData o2) {
 

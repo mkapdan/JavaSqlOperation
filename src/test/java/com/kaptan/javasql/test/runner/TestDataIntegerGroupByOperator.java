@@ -1,23 +1,23 @@
 package com.kaptan.javasql.test.runner;
 
-import com.kaptan.groupby.AbstractGroupBy;
-import com.kaptan.groupby.Grouper;
+import com.kaptan.groupby.AbstractGroupByOperator;
+import com.kaptan.groupby.GrouperBy;
 import com.kaptan.javasql.test.model.TestData;
 
-public class TestDataIntegerGroupByOperator extends AbstractGroupBy<Integer, TestData> {
+public class TestDataIntegerGroupByOperator extends AbstractGroupByOperator<Integer, TestData> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TestDataIntegerGroupByOperator(Grouper<Integer, TestData> grouper) {
+	public TestDataIntegerGroupByOperator(GrouperBy<Integer, TestData> grouper) {
 		super(grouper);
 	}
 
 	@Override
-	public void setGrouper(Grouper<Integer, TestData> grouper) {
-		this.grouper = grouper;
+	public void setGroupByCondition(GrouperBy<Integer, TestData> grouper) {
+		this.groupByCondition = grouper;
 	}
 
 }

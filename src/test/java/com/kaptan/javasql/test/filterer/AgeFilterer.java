@@ -1,9 +1,9 @@
 package com.kaptan.javasql.test.filterer;
 
-import com.kaptan.filterby.AbstractFilterer;
+import com.kaptan.filterby.AbstractFilter;
 import com.kaptan.javasql.test.model.TestData;
 
-public class AgeFilterer extends AbstractFilterer<TestData, TestData> {
+public class AgeFilterer extends AbstractFilter<TestData, TestData> {
 
 	/**
 	 * 

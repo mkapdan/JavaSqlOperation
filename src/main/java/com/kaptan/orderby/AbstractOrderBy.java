@@ -1,8 +1,12 @@
 package com.kaptan.orderby;
 
-import java.util.Comparator;
-
-public abstract class AbstractComparator<T> implements Comparator<T> {
+/**
+ * 
+ * @author kaptan
+ *
+ * @param <T>   type of data will be ordered.
+ */
+public abstract class AbstractOrderBy<T> implements OrderBy<T> {
 
 	public int nullEqualtyCheck(T o1, T o2) {
 		if (null == o1) {
@@ -18,5 +22,7 @@ public abstract class AbstractComparator<T> implements Comparator<T> {
 		}
 		return 0;
 	}
+
+
 
 }

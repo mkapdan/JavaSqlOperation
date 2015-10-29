@@ -1,6 +1,12 @@
 package com.kaptan.filterby;
-
-public abstract class AbstractFilterer<T, V> implements Filterer<T, V> {
+/**
+ * Abstract Filter Condition Class
+ * @author kaptan
+ *
+ * @param <T> will be filtered data class type
+ * @param <V> filter data class type
+ */
+public abstract class AbstractFilter<T, V> implements Filter<T, V> {
 
 	/**
 	 * 

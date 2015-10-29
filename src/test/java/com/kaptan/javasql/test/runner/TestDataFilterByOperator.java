@@ -1,23 +1,23 @@
 package com.kaptan.javasql.test.runner;
 
-import com.kaptan.filterby.AbstractFilterBy;
-import com.kaptan.filterby.Filterer;
+import com.kaptan.filterby.AbstractFilterOperator;
+import com.kaptan.filterby.Filter;
 import com.kaptan.javasql.test.model.TestData;
 
-public class TestDataFilterByOperator extends AbstractFilterBy<TestData, TestData> {
+public class TestDataFilterByOperator extends AbstractFilterOperator<TestData, TestData> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TestDataFilterByOperator(Filterer<TestData, TestData> filterer) {
+	public TestDataFilterByOperator(Filter<TestData, TestData> filterer) {
 		super(filterer);
 	}
 
 	@Override
-	public void setFilterer(Filterer<TestData, TestData> filterer) {
-		this.filterer = filterer;
+	public void setFilterCondition(Filter<TestData, TestData> filterer) {
+		this.filterCondition = filterer;
 	}
 
 }

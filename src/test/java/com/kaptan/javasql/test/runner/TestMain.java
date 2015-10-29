@@ -2,14 +2,16 @@ package com.kaptan.javasql.test.runner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.kaptan.filterby.FilterBy;
-import com.kaptan.filterby.Filterer;
-import com.kaptan.groupby.Grouper;
+import com.kaptan.filterby.Filter;
+import com.kaptan.filterby.FilterOperator;
+import com.kaptan.groupby.GrouperBy;
+import com.kaptan.javasql.test.comprator.DateComparator;
 import com.kaptan.javasql.test.comprator.NameComparator;
 import com.kaptan.javasql.test.filterer.AgeFilterer;
 import com.kaptan.javasql.test.filterer.DifferentObjectNameFilterer;
@@ -19,7 +21,7 @@ import com.kaptan.javasql.test.grouper.DateGrouper;
 import com.kaptan.javasql.test.grouper.NameGrouper;
 import com.kaptan.javasql.test.model.CopyOfTestData;
 import com.kaptan.javasql.test.model.TestData;
-import com.kaptan.orderby.OrderBy;
+import com.kaptan.orderby.OrderByOperator;
 
 public class TestMain {
 
@@ -55,31 +57,31 @@ public class TestMain {
 	}
 
 	private static void grouperOperations(List<TestData> items) {
-		Grouper<String, TestData> nameGrouper = new NameGrouper();
+		GrouperBy<String, TestData> nameGrouper = new NameGrouper();
 		TestDataTextGroupByOperator groupOperator = new TestDataTextGroupByOperator(nameGrouper);
-		Map<String, List<TestData>> groupedData = groupOperator.group(items);
+		Map<String, Collection<TestData>> groupedData = groupOperator.groupBy(items);
 
-		for (Map.Entry<String, List<TestData>> mapEnt : groupedData.entrySet()) {
+		for (Map.Entry<String, Collection<TestData>> mapEnt : groupedData.entrySet()) {
 
 			System.out.println("###" + mapEnt.getKey() + "###");
 			printData("Result", mapEnt.getValue());
 		}
 
-		Grouper<Integer, TestData> ageGrouper = new AgeGrouper();
+		GrouperBy<Integer, TestData> ageGrouper = new AgeGrouper();
 		TestDataIntegerGroupByOperator integerGrouper = new TestDataIntegerGroupByOperator(ageGrouper);
-		Map<Integer, List<TestData>> integerData = integerGrouper.group(items);
+		Map<Integer, Collection<TestData>> integerData = integerGrouper.groupBy(items);
 
-		for (Map.Entry<Integer, List<TestData>> mapEnt : integerData.entrySet()) {
+		for (Map.Entry<Integer, Collection<TestData>> mapEnt : integerData.entrySet()) {
 
 			System.out.println("###" + mapEnt.getKey() + "###");
 			printData("Result", mapEnt.getValue());
 		}
 
-		Grouper<Date, TestData> birthGrouper = new DateGrouper();
+		GrouperBy<Date, TestData> birthGrouper = new DateGrouper();
 		TestDataDateGroupByOperator dateGroupOperator = new TestDataDateGroupByOperator(birthGrouper);
-		Map<Date, List<TestData>> dateData = dateGroupOperator.group(items);
+		Map<Date, Collection<TestData>> dateData = dateGroupOperator.groupBy(items);
 
-		for (Map.Entry<Date, List<TestData>> mapEnt : dateData.entrySet()) {
+		for (Map.Entry<Date, Collection<TestData>> mapEnt : dateData.entrySet()) {
 
 			System.out.println("###" + mapEnt.getKey() + "###");
 			printData("Result", mapEnt.getValue());
@@ -90,40 +92,42 @@ public class TestMain {
 
 		/***************** Age Filterer ********************/
 
-		Filterer<TestData, TestData> filterer = new AgeFilterer();
-		FilterBy<TestData, TestData> filterOperator = new TestDataFilterByOperator(filterer);
-		List<TestData> filtereds = filterOperator.filter(items, o1);
+		Filter<TestData, TestData> filterer = new AgeFilterer();
+		FilterOperator<TestData, TestData> filterOperator = new TestDataFilterByOperator(filterer);
+		Collection<TestData> filtereds = filterOperator.filter(items, o1);
 		printData("After", filtereds);
 
 		/******************* Name Filterer ****************************/
 
 		filterer = new NameFilterer();
-		filterOperator.setFilterer(filterer);
+		filterOperator.setFilterCondition(filterer);
 
 		filtereds = filterOperator.filter(items, o1);
 		printData("After", filtereds);
 
 		/******************* Name Filterer ****************************/
 		CopyOfTestData cp1 = new CopyOfTestData("AAA", 24, new Date());
-		Filterer<TestData, CopyOfTestData> diffFilterer = new DifferentObjectNameFilterer();
+		Filter<TestData, CopyOfTestData> diffFilterer = new DifferentObjectNameFilterer();
 		TestDataFilterByDiffObjOperator diffFilterOper = new TestDataFilterByDiffObjOperator(diffFilterer);
-		List<TestData> myFiltereds = diffFilterOper.filter(items, cp1);
+		Collection<TestData> myFiltereds = diffFilterOper.filter(items, cp1);
 		printData("After", myFiltereds);
 
 	}
 
 	private static List<TestData> orderOperationTests(List<TestData> items) {
 
-		Comparator<TestData> comparator = new NameComparator();
-		OrderBy<TestData> orderer = new TestDataOrderByOperator(comparator);
+		Comparator<TestData> comparator = new DateComparator();
+		OrderByOperator<TestData> orderer = new TestDataOrderByOperator(comparator);
 
 		printData("Before", items);
-		items = orderer.orderBy(items);
+		items = (List<TestData>) orderer.orderBy(items);
+		printData("After", items);
+		items = (List<TestData>) orderer.reverseOrder(items);
 		printData("After", items);
 		return items;
 	}
 
-	private static void printData(String title, List<TestData> items) {
+	private static void printData(String title, Collection<TestData> items) {
 
 		System.out.println("###" + title + "###");
 		for (TestData t : items) {

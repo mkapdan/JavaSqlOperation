@@ -1,9 +1,9 @@
 package com.kaptan.javasql.test.comprator;
 
 import com.kaptan.javasql.test.model.TestData;
-import com.kaptan.orderby.AbstractComparator;
+import com.kaptan.orderby.AbstractOrderBy;
 
-public class NameComparator extends AbstractComparator<TestData> {
+public class NameComparator extends AbstractOrderBy<TestData> {
 
 	public int compare(TestData o1, TestData o2) {
 
